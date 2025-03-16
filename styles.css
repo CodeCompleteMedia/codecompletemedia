@@ -542,6 +542,10 @@ footer {
     max-width: 500px;
     margin: 0 auto;
   }
+
+  .image-container img {
+    height: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {
