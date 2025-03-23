@@ -58,8 +58,8 @@
 				<h2>Marketing, Media & Website Solutions for Small & Medium-Sized Businesses</h2>
 				<p>Affordable · Professional · Tailored Solutions</p>
 				<div class="cta-buttons">
-					<button class="btn btn-primary" on:click={() => goto('/contact')}> Get in Touch </button>
-					<button class="btn btn-secondary" on:click={() => goto('/services')}>
+					<button class="btn btn-primary" onclick={() => goto('/contact')}> Get in Touch </button>
+					<button class="btn btn-secondary" onclick={() => goto('/services')}>
 						Our Services
 					</button>
 				</div>
@@ -223,7 +223,7 @@
 									<polyline points="22,6 12,13 2,6"></polyline>
 								</svg>
 							</i>
-							<a href="mailto:info@codecompletemedia.com">info@codecompletemedia.com</a>
+							<a href="mailto:carla@codecompletemedia.com">carla@codecompletemedia.com</a>
 						</div>
 						<div class="contact-item">
 							<i>
@@ -246,7 +246,7 @@
 						</div>
 					</div>
 					<div class="social-links">
-						<a href="#" aria-label="Facebook">
+						<a href="https://facebook.com" aria-label="Facebook">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="18"
@@ -261,7 +261,7 @@
 								<path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
 							</svg>
 						</a>
-						<a href="#" aria-label="Twitter">
+						<!-- <a href="https://x.com" aria-label="Twitter">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="18"
@@ -277,8 +277,8 @@
 									d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"
 								></path>
 							</svg>
-						</a>
-						<a href="#" aria-label="Instagram">
+						</a> -->
+						<a href="https://instagram.com" aria-label="Instagram">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="18"
@@ -297,7 +297,7 @@
 								</rect></svg
 							>
 						</a>
-						<a href="#" aria-label="LinkedIn">
+						<a href="https://linkedin.com" aria-label="LinkedIn">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="18"
