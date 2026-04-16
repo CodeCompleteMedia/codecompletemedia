@@ -24,7 +24,7 @@
 	const bitwiseSubRoles = [
 		{
 			years: '2021–2023',
-			title: 'Marketing Department Manager',
+			title: 'Lead Software Engineer, Marketing Department Manager',
 			bullets: [
 				'Led in-house marketing team of three developers owning the Bitwise corporate website and brand sites for Shift3 Development and Geekwise Academy divisions.',
 				'Ran all marketing creative, web, and campaign production in-house — no external agency retainer — across brand, recruiting, admissions, and client-facing channels.',
@@ -94,13 +94,8 @@
 	<section>
 		<h2>Professional Summary</h2>
 		<p class="summary">
-			Hands-on marketing leader with a decade of in-house marketing department experience and active,
-			current work producing real-estate marketing assets for Trumark Homes listings. Combine print
-			and digital collateral production, website management, email marketing, event coordination, and
-			team leadership with direct familiarity with new-home sales marketing. Comfortable owning the
-			full execution stack — brand website, campaign creative, social content, photo and video — and
-			equally comfortable coordinating vendors, reconciling budgets, and holding to detail-level
-			accuracy standards.
+			Hands-on marketing and tech development leader with over a decade of in-house marketing management experience.
+			Expertise in combining marketing needs with technical solutions, whether building a custom campaign landing page or troubleshooting an email template. Background in software engineering and technology education informs a practical, problem-solving approach to marketing challenges and a collaborative, communicative approach to cross-functional coordination and team leadership.
 		</p>
 	</section>
 
@@ -138,28 +133,6 @@
 					Accessibility advisor on client-facing deliverables; manage client communication and
 					project expectations.
 				</li>
-			</ul>
-		</div>
-
-		<div class="role">
-			<div class="role-head">
-				<div>
-					<span class="role-title">Marketing Content Producer</span> —
-					<span class="role-company">Petra Higley, Trumark Homes Realtor</span>
-				</div>
-				<div class="role-dates">2025 – Present</div>
-			</div>
-			<div class="role-meta">Freelance — Madera, CA</div>
-			<ul>
-				<li>
-					Produce photography, videography, post-production, and social-media content for Trumark
-					Homes new-construction listings represented by licensed realtor Petra Higley.
-				</li>
-				<li>
-					Active working familiarity with Trumark brand standards, community and model presentation,
-					and new-homes sales marketing flow.
-				</li>
-				<li>Coordinate asset delivery against listing schedules and open-house timing.</li>
 			</ul>
 		</div>
 
