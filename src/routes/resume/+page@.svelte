@@ -73,7 +73,7 @@
 </svelte:head>
 
 <div class="page">
-	<header class="resume-header">
+	<div class="resume-header">
 		<h1 class="name">Matthew Higley</h1>
 		<div class="title-line">Marketing Leader · Creative Producer · Web &amp; Brand</div>
 		<div class="contact">
@@ -89,7 +89,7 @@
 			<span class="sep">|</span>
 			<a href={contact.companySite}>codecompletemedia.com</a>
 		</div>
-	</header>
+	</div>
 
 	<section>
 		<h2>Professional Summary</h2>
