@@ -76,7 +76,7 @@
 	<div class="resume-header">
 		<h1 class="name">Matthew Higley</h1>
 		<div class="title-line">Marketing Leader · Creative Producer · Web &amp; Brand</div>
-		<div class="contact">
+		<div class="resume-contact">
 			{contact.location}
 			<span class="sep">|</span>
 			{contact.phone}
@@ -280,18 +280,19 @@
 		margin-bottom: 8px;
 	}
 
-	.contact {
+	.resume-contact {
 		font-size: 9.5pt;
 		color: var(--ink);
+		padding: 1rem;
 	}
 
-	.contact a {
+	.resume-contact a {
 		color: var(--ink);
 		text-decoration: none;
 		border-bottom: 1px dotted var(--muted);
 	}
 
-	.contact .sep {
+	.resume-contact .sep {
 		color: var(--rule);
 		margin: 0 8px;
 	}
