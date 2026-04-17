@@ -94,8 +94,7 @@
 	<section>
 		<h2>Professional Summary</h2>
 		<p class="summary">
-			Hands-on marketing and tech development leader with over a decade of in-house marketing management experience.
-			Expertise in combining marketing needs with technical solutions, whether building a custom campaign landing page or troubleshooting an email template. Background in software engineering and technology education informs a practical, problem-solving approach to marketing challenges and a collaborative, communicative approach to cross-functional coordination and team leadership.
+			Hands-on marketing and tech development leader with over a decade of in-house marketing management experience. Expertise in combining marketing needs with technical solutions, whether building a custom campaign landing page or troubleshooting an email template. Looking for an opportunity to leverage my unique blend of marketing and software engineering experience to lead a dynamic marketing team and drive impactful campaigns.
 		</p>
 	</section>
 
@@ -121,18 +120,9 @@
 			</div>
 			<div class="role-meta">Fresno, CA</div>
 			<ul>
-				<li>
-					Teach marketing fundamentals to sophomore, junior, and senior students: Framer websites,
-					MailChimp email marketing, Guerrilla Marketing, Google Analytics, and Figma design.
-				</li>
-				<li>
-					Mentor 3–5 concurrent student teams delivering Business Model Canvas, email marketing, and
-					websites for 21 local business clients.
-				</li>
-				<li>
-					Accessibility advisor on client-facing deliverables; manage client communication and
-					project expectations.
-				</li>
+				<li>Teach marketing fundamentals to sophomore, junior, and senior students: Framer websites, MailChimp email marketing, Guerrilla Marketing, Google Analytics, and Figma design.</li>
+				<li>Mentor 3–5 concurrent student teams delivering Business Model Canvas, email marketing, and websites for 21 local business clients.</li>
+				<li>Accessibility advisor on client-facing deliverables; manage client communication and project expectations.</li>
 			</ul>
 		</div>
 
@@ -146,8 +136,7 @@
 			</div>
 			<div class="role-meta">Fresno, CA</div>
 			<div class="progression">
-				Technology Educator → Software Engineer → Marketing Specialist → Marketing Coordinator →
-				Marketing Development Engineer → Marketing Department Manager
+				Technology Educator → Software Engineer → Marketing Specialist → Marketing Coordinator → Marketing Development Engineer → Marketing Department Manager
 			</div>
 
 			<div class="bitwise-timeline">
@@ -177,8 +166,7 @@
 			<div class="role-meta">Fresno, CA</div>
 			<ul>
 				<li>
-					Shot and edited wedding videography and commercial B-roll; contributed to creative
-					conception; managed direct client communication on shoots and deliverables.
+					Shot and edited wedding videography and commercial B-roll; contributed to creative conception; managed direct client communication on shoots and deliverables.
 				</li>
 			</ul>
 		</div>
@@ -187,16 +175,13 @@
 			<div class="role-head">
 				<div>
 					<span class="role-title">Software Engineer &amp; Marketing Intern</span> —
-					<span class="role-company">Paprika Studios</span>
+					<span class="role-company">Paprika Studios | Marketing Firm</span>
 				</div>
 				<div class="role-dates">2011 – 2012</div>
 			</div>
 			<div class="role-meta">Fresno, CA</div>
 			<ul>
-				<li>
-					Built Drupal/PHP/HTML/CSS/jQuery sites for an agriculture- and food-focused commercial
-					photo/video studio.
-				</li>
+				<li>Built Drupal/PHP/HTML/CSS/jQuery sites for an agriculture- and food-focused commercial photo/video studio.</li>
 				<li>Assisted on production shoots: audio support, editing assistance, on-set help.</li>
 			</ul>
 		</div>
@@ -211,14 +196,8 @@
 			</div>
 			<div class="role-meta">Fresno, CA — promoted from Jr. Software Developer</div>
 			<ul>
-				<li>
-					Front-end and back-end web development (HTML, CSS, jQuery, PHP) at an award-winning
-					boutique brand, web, and iOS studio.
-				</li>
-				<li>
-					Worked cross-functionally with marketing and design team on client deliverables for
-					branding, web, print, and environmental design.
-				</li>
+				<li>Front-end and back-end web development (HTML, CSS, jQuery, PHP) at an award-winning boutique brand, web, and iOS studio.</li>
+				<li>Worked cross-functionally with marketing and design team on client deliverables for branding, web, print, and environmental design.</li>
 			</ul>
 		</div>
 	</section>
