@@ -60,10 +60,10 @@
 
 	const tools = [
 		{ label: 'Design & Creative', items: 'Adobe Photoshop, Adobe Illustrator, Figma, Sketch' },
-		{ label: 'Web & CMS', items: 'Adobe Dreamweaver, WordPress, Drupal, Framer, React, Svelte, Gatsby, PHP, HTML, CSS, Tailwind CSS, JavaScript, jQuery' },
 		{ label: 'Marketing & Analytics', items: 'MailChimp, Google Analytics, SEO' },
+		{ label: 'Photo & Video', items: 'Adobe Lightroom, Adobe Premiere Pro, photography, videography, post-production' },
 		{ label: 'Productivity', items: 'Google Sheets, Google Docs, Excel, Slack, Discord, Monday.com, Hubspot' },
-		{ label: 'Photo & Video', items: 'Adobe Lightroom, Adobe Premiere Pro, photography, videography, post-production' }
+		{ label: 'Web & CMS', items: 'Adobe Dreamweaver, WordPress, Drupal, Framer, React, Svelte, Gatsby, PHP, HTML, CSS, Tailwind CSS, JavaScript, jQuery' }
 	];
 </script>
 
