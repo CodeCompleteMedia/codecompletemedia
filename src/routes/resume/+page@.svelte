@@ -338,7 +338,7 @@
 	}
 
 	.role {
-		margin-bottom: 12px;
+		margin-bottom: 24px;
 	}
 
 	.role-head {
