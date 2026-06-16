@@ -1,0 +1,162 @@
+---
+import { getCollection } from 'astro:content';
+
+const services = (await getCollection('services')).sort(
+  (a, b) => a.data.order - b.data.order
+);
+---
+
+<section class="section wrap jump" id="services">
+  <div class="section-head" data-reveal>
+    <span class="eyebrow"><span class="bar"></span>Services</span>
+    <h2 class="h2">Everything your site needs, under one roof.</h2>
+    <p class="lead" style="max-width:54ch">
+      No handoffs between five vendors. Design, code, words, and growth live in the same place, so
+      nothing falls through the cracks.
+    </p>
+  </div>
+  <div class="acc">
+    {
+      services.map((s, i) => (
+        <div class="acc-item" id={`svc-${s.slug}`} data-open={i === 0 ? 'true' : 'false'}>
+          <button class="acc-head" aria-expanded={i === 0 ? 'true' : 'false'} aria-controls={`acc-p-${i}`}>
+            <span class="acc-num">{s.data.number}</span>
+            <h3 class="acc-title">{s.data.title}</h3>
+            <span class="acc-toggle" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+              </svg>
+            </span>
+          </button>
+          <div class="acc-panel" id={`acc-p-${i}`}>
+            <div class="acc-panel-inner">
+              <div class="acc-content">
+                <p>{s.data.summary}</p>
+                <div class="acc-inc">
+                  {s.data.includes.map((x) => (
+                    <div class="inc">
+                      <span class="tick">
+                        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                          <path d="M5 12.5 10 17.5 19 7" stroke="#3F3568" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                      </span>
+                      {x}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .acc {
+    margin-top: clamp(28px, 4vw, 44px);
+    border-top: 1px solid var(--line);
+  }
+  .acc-item {
+    border-bottom: 1px solid var(--line);
+    scroll-margin-top: 90px; /* clear the fixed header when deep-linked */
+  }
+  .acc-head {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: clamp(14px, 2.5vw, 28px);
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    padding: clamp(20px, 2.6vw, 28px) 6px;
+    color: inherit;
+  }
+  .acc-num {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--faint);
+  }
+  .acc-item[data-open='true'] .acc-num {
+    color: var(--accent-cta);
+  }
+  .acc-title {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    margin: 0;
+    transition: transform 0.3s var(--ease);
+  }
+  .acc-head:hover .acc-title {
+    transform: translateX(10px);
+  }
+  .acc-toggle {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--line-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--brand);
+    transition: transform 0.3s var(--ease), background 0.25s, color 0.25s;
+    flex: none;
+  }
+  .acc-item[data-open='true'] .acc-toggle {
+    transform: rotate(45deg);
+    background: var(--brand);
+    color: var(--paper);
+    border-color: var(--brand);
+  }
+  .acc-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.35s var(--ease);
+  }
+  .acc-item[data-open='true'] .acc-panel {
+    grid-template-rows: 1fr;
+  }
+  .acc-panel-inner {
+    overflow: hidden;
+  }
+  .acc-content {
+    padding: 0 6px clamp(24px, 3vw, 32px) calc(14px + 2ch);
+    max-width: 70ch;
+  }
+  .acc-content p {
+    margin: 0 0 18px;
+    color: var(--muted);
+    font-size: 16px;
+  }
+  .acc-inc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+  }
+  .inc {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .inc .tick {
+    flex: none;
+    width: 21px;
+    height: 21px;
+    border-radius: 50%;
+    background: oklch(0.72 0.06 272 / 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @media (max-width: 860px) {
+    .acc-inc {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

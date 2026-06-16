@@ -1,0 +1,138 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+---
+
+<section class="section wrap jump" id="insights">
+  <div class="section-head" data-reveal>
+    <span class="eyebrow"><span class="bar"></span>Insights</span>
+    <h2 class="h2">How we think about the work.</h2>
+  </div>
+  <div class="posts">
+    {
+      posts.map((b, i) => (
+        <a class={`post${i === 0 ? ' feature' : ''}`} href={`/blog/${b.slug}`} data-reveal>
+          <div class="post-img"></div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span>{b.data.category}</span>
+              <span class="sep">/</span>
+              <span class="read">{b.data.readTime}</span>
+            </div>
+            <h3>{b.data.title}</h3>
+          </div>
+        </a>
+      ))
+    }
+  </div>
+  <div class="more-row" data-reveal>
+    <a class="more-link" href="/blog">
+      More insights
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<style>
+  .posts {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 18px;
+    margin-top: clamp(30px, 4vw, 44px);
+  }
+  .more-row {
+    display: flex;
+    justify-content: center;
+    margin-top: clamp(28px, 4vw, 40px);
+  }
+  .more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent-cta);
+    text-decoration: none;
+    padding: 10px 4px;
+  }
+  .more-link svg {
+    transition: transform 0.3s var(--ease);
+  }
+  .more-link:hover svg {
+    transform: translateX(5px);
+  }
+  .post {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s;
+  }
+  .post:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .post.feature {
+    grid-row: span 2;
+  }
+  .post-img {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, oklch(0.72 0.06 272 / 0.22), oklch(0.97 0.01 286));
+    position: relative;
+  }
+  .post.feature .post-img {
+    aspect-ratio: 16/10;
+  }
+  .post-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(100% 120% at 0% 0%, oklch(0.37 0.075 287 / 0.14), transparent 60%);
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--accent-cta);
+  }
+  .post-meta .sep {
+    color: var(--line-2);
+  }
+  .post-meta .read {
+    color: var(--faint);
+  }
+  .post-body {
+    padding: 20px 22px 24px;
+  }
+  .post h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.15rem, 1.6vw, 1.5rem);
+    line-height: 1.18;
+    margin: 12px 0 0;
+  }
+  .post.feature h3 {
+    font-size: clamp(1.5rem, 2.4vw, 2.1rem);
+  }
+  @media (max-width: 860px) {
+    .posts {
+      grid-template-columns: 1fr;
+    }
+    .post.feature {
+      grid-row: auto;
+    }
+  }
+</style>

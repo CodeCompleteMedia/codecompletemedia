@@ -1,0 +1,139 @@
+---
+const values = [
+  {
+    t: 'Sweat the details',
+    d: 'The small stuff is the work. We obsess over the things most people quietly skip.',
+  },
+  {
+    t: 'One point of contact',
+    d: 'You talk to the person doing the work. No account-manager telephone game.',
+  },
+  {
+    t: 'Own everything',
+    d: 'Code, content, and accounts are yours to keep. No lock-in, ever.',
+  },
+];
+---
+
+<section class="section wrap jump" id="about">
+  <div class="section-head" data-reveal>
+    <span class="eyebrow"><span class="bar"></span>About</span>
+    <h2 class="h2">Three things we never cut.</h2>
+    <p class="lead" style="max-width:54ch">
+      Code Complete Media is a full-service web studio built around one person you actually talk to,
+      from first call to launch.
+    </p>
+  </div>
+  <div class="values">
+    {
+      values.map((v) => (
+        <div class="value" data-reveal>
+          <h3>{v.t}</h3>
+          <p>{v.d}</p>
+        </div>
+      ))
+    }
+  </div>
+  <div class="founder" data-reveal style="margin-top:clamp(34px,5vw,52px)">
+    <div class="portrait">portrait</div>
+    <div>
+      <h3>Matthew Higley</h3>
+      <div class="role">Founder &amp; Lead</div>
+      <p>
+        Designer, developer, and the human you actually talk to, from first call to launch.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .values {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(20px, 3vw, 40px);
+    margin-top: clamp(30px, 4vw, 46px);
+    counter-reset: val;
+  }
+  .value {
+    position: relative;
+    padding-top: 24px;
+    border-top: 2px solid var(--ink);
+  }
+  .value::before {
+    counter-increment: val;
+    content: '0' counter(val);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--accent-cta);
+    position: absolute;
+    top: 24px;
+    right: 0;
+  }
+  .value h3 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.45rem;
+    margin: 0 0 8px;
+  }
+  .value p {
+    font-size: 15.5px;
+    color: var(--muted);
+    margin: 0;
+  }
+  .founder {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(24px, 4vw, 48px);
+    align-items: center;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-xl);
+    padding: clamp(24px, 3.4vw, 44px);
+    margin-top: clamp(30px, 4vw, 46px);
+  }
+  .portrait {
+    aspect-ratio: 1;
+    border-radius: var(--r-lg);
+    background: linear-gradient(140deg, oklch(0.72 0.06 272 / 0.3), var(--surface-3));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--faint);
+  }
+  .founder h3 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  .founder .role {
+    font-family: var(--sans);
+    font-size: 14px;
+    color: var(--accent-cta);
+    margin: 8px 0 16px;
+  }
+  .founder p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text);
+    margin: 0;
+    max-width: 46ch;
+  }
+  @media (max-width: 980px) {
+    .values {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 860px) {
+    .founder {
+      grid-template-columns: 1fr;
+      text-align: left;
+    }
+    .portrait {
+      max-width: 240px;
+    }
+  }
+</style>

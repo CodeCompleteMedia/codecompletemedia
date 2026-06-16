@@ -1,0 +1,245 @@
+---
+const compare = [
+  { k: 'Point of contact', old: 'A rotating cast', neu: 'One human, every time' },
+  { k: 'Pricing', old: 'Surprise invoices', neu: 'Clear, flat quotes' },
+  { k: 'Speed', old: 'Weeks to a reply', neu: 'Kickoff in 48 hours' },
+];
+---
+
+<section class="hero" id="top">
+  <div class="blob a"></div>
+  <div class="blob b"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <h1 class="h1">
+        Agency quality.<br />Freelancer price.<br /><span class="accent">Zero runaround.</span>
+      </h1>
+      <p class="lead">
+        We design and build websites that earn their keep, plus the SEO, copy, and strategy to back
+        them up. One team, no layers, no mystery invoices.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="/#contact">Start a project</a>
+        <a class="btn btn-ghost" href="/#work">See the work</a>
+      </div>
+      <p class="hero-trust">Trusted by founders, funds, and growing brands.</p>
+    </div>
+    <div data-reveal class="compare">
+      <div class="compare-top">
+        <span class="ttl">The old way vs. ours</span>
+        <span class="tag-pill">side by side</span>
+      </div>
+      {
+        compare.map((row) => (
+          <div class="compare-row">
+            <div class="cell old">
+              <div class="k">{row.k}</div>
+              <div class="v">{row.old}</div>
+            </div>
+            <div class="cell new">
+              <div class="k">{row.k}</div>
+              <div class="v">{row.neu}</div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  // Subtle pointer parallax for the hero globes. Composes with the CSS float
+  // keyframes via the `translate` property and respects reduced-motion.
+  const reduce = window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const hero = document.getElementById('top');
+  const blobA = hero?.querySelector<HTMLElement>('.blob.a');
+  const blobB = hero?.querySelector<HTMLElement>('.blob.b');
+
+  if (hero && blobA && blobB && !reduce && window.matchMedia('(pointer:fine)').matches) {
+    // Depth factors (px of travel at the screen edge).
+    // Blob A's direction is reversed (negative) relative to the pointer.
+    const DEPTH_A = -34;
+    const DEPTH_B = -22;
+    let tx = 0;
+    let ty = 0;
+    let raf = 0;
+
+    const apply = () => {
+      raf = 0;
+      blobA.style.translate = `${tx * DEPTH_A}px ${ty * DEPTH_A}px`;
+      blobB.style.translate = `${tx * DEPTH_B}px ${ty * DEPTH_B}px`;
+    };
+
+    const onMove = (e: PointerEvent) => {
+      // Normalize pointer position to roughly [-1, 1] from viewport center.
+      tx = (e.clientX / window.innerWidth) * 2 - 1;
+      ty = (e.clientY / window.innerHeight) * 2 - 1;
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+
+    const reset = () => {
+      tx = 0;
+      ty = 0;
+      if (!raf) raf = requestAnimationFrame(apply);
+    };
+
+    window.addEventListener('pointermove', onMove, { passive: true });
+    document.addEventListener('pointerleave', reset);
+  }
+</script>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: clamp(118px, 15vw, 168px);
+    padding-bottom: clamp(56px, 8vw, 92px);
+    overflow: hidden;
+  }
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(10px);
+    pointer-events: none;
+    /* `translate` (set by the pointer script) composes with the keyframe
+       `transform` below, so the float animation and parallax coexist. */
+    translate: 0 0;
+    transition: translate 0.5s var(--ease);
+    will-change: transform, translate;
+  }
+  .blob.a {
+    /* Pulled ~10% toward viewport center from the top-right corner. */
+    top: calc(-80px + 10vh);
+    right: calc(-60px + 10vw);
+    width: min(56vw, 640px);
+    aspect-ratio: 1;
+    filter: blur(24px); /* blurrier than the base .blob */
+    background: radial-gradient(circle at 30% 30%, oklch(0.72 0.06 272 / 0.5), transparent 70%);
+    animation: float 17s var(--ease) infinite;
+  }
+  .blob.b {
+    /* Pulled ~10% toward viewport center from the bottom-left corner. */
+    bottom: calc(-140px + 10vh);
+    left: calc(-90px + 10vw);
+    width: min(50vw, 560px);
+    aspect-ratio: 1;
+    background: radial-gradient(circle, oklch(0.37 0.075 287 / 0.26), transparent 70%);
+    animation: float2 21s var(--ease) infinite;
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(24px, -30px) scale(1.1);
+    }
+  }
+  @keyframes float2 {
+    0%,
+    100% {
+      transform: translate(0, 0) scale(1);
+    }
+    50% {
+      transform: translate(-26px, 26px) scale(1.12);
+    }
+  }
+  .hero-grid {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.06fr 0.94fr;
+    gap: clamp(36px, 5vw, 60px);
+    align-items: center;
+  }
+  .hero :global(h1) {
+    margin-top: 0;
+  }
+  .hero :global(.lead) {
+    margin-top: 22px;
+    max-width: 46ch;
+    font-size: clamp(1.1rem, 1.5vw, 1.34rem);
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    margin-top: 32px;
+  }
+  .hero-trust {
+    margin-top: 26px;
+    font-size: 14px;
+    color: var(--faint);
+    font-weight: 500;
+  }
+  .compare {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 26px;
+    box-shadow: var(--shadow-md);
+  }
+  .compare-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+  .compare-top .ttl {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 19px;
+  }
+  .tag-pill {
+    font-family: var(--sans);
+    font-size: 11.5px;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    padding: 5px 10px;
+    border-radius: var(--r-pill);
+  }
+  .compare-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 11px;
+    margin-bottom: 11px;
+  }
+  .compare-row:last-child {
+    margin-bottom: 0;
+  }
+  .cell {
+    border-radius: var(--r-md);
+    padding: 14px 15px;
+  }
+  .cell.old {
+    background: var(--surface-2);
+  }
+  .cell.new {
+    background: oklch(0.72 0.06 272 / 0.16);
+    border: 1px solid oklch(0.72 0.06 272 / 0.35);
+  }
+  .cell .k {
+    font-size: 12.5px;
+    font-weight: 600;
+    margin-bottom: 5px;
+    color: var(--faint);
+  }
+  .cell.new .k {
+    color: var(--brand);
+  }
+  .cell .v {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .cell.new .v {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  @media (max-width: 860px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+  }
+</style>

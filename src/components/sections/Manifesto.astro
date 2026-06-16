@@ -1,0 +1,55 @@
+---
+
+---
+
+<section class="manifesto">
+  <div class="glow"></div>
+  <div class="wrap manifesto-inner" data-reveal>
+    <span class="eyebrow" style="justify-content:center">Our one rule</span>
+    <h2>AI <span class="accent">and</span>.<br />Not AI instead.</h2>
+    <p>
+      AI is additive to craft, not a replacement for it. We use every tool we have to move faster and
+      reach further, then put a human on every detail that matters. That is the part you can feel.
+    </p>
+  </div>
+</section>
+
+<style>
+  .manifesto {
+    position: relative;
+    text-align: center;
+    overflow: hidden;
+    padding-block: clamp(78px, 11vw, 140px);
+  }
+  .manifesto .glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(90vw, 760px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, oklch(0.72 0.06 272 / 0.18), transparent 66%);
+    pointer-events: none;
+  }
+  .manifesto-inner {
+    position: relative;
+    max-width: 46ch;
+    margin: 0 auto;
+  }
+  .manifesto h2 {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(2.6rem, 7vw, 5.2rem);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+    margin: 14px 0 0;
+  }
+  .manifesto p {
+    font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+    line-height: 1.55;
+    color: var(--muted);
+    max-width: 54ch;
+    margin: 22px auto 0;
+  }
+</style>

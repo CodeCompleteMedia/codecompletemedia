@@ -1,0 +1,135 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { SITE } from '../consts';
+
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  readTime: string;
+  publishDate: Date;
+}
+
+const { title, description, category, readTime, publishDate } = Astro.props;
+const dateLabel = publishDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={`${title} · ${SITE.shortName}`} description={description} ogTitle={title} ogDescription={description}>
+  <article class="post-page">
+    <div class="wrap post-head">
+      <a class="back" href="/blog">← All insights</a>
+      <div class="post-meta">
+        <span>{category}</span>
+        <span class="sep">/</span>
+        <span class="read">{readTime}</span>
+        <span class="sep">/</span>
+        <time datetime={publishDate.toISOString()}>{dateLabel}</time>
+      </div>
+      <h1 class="h1">{title}</h1>
+      <p class="lead">{description}</p>
+    </div>
+    <div class="wrap prose">
+      <slot />
+    </div>
+    <div class="wrap post-cta">
+      <a class="btn btn-primary" href="/#contact">Start a project</a>
+      <a class="btn btn-ghost" href="/blog">Read more insights</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .post-page {
+    padding-top: clamp(118px, 15vw, 168px);
+    padding-bottom: clamp(48px, 8vw, 96px);
+  }
+  .post-head {
+    max-width: 760px;
+  }
+  .back {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    margin-bottom: 24px;
+  }
+  .back:hover {
+    color: var(--accent-cta);
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--accent-cta);
+    margin-bottom: 16px;
+  }
+  .post-meta .sep {
+    color: var(--line-2);
+  }
+  .post-meta .read,
+  .post-meta time {
+    color: var(--faint);
+  }
+  .post-head .h1 {
+    font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+  }
+  .post-head .lead {
+    margin-top: 18px;
+    max-width: 60ch;
+  }
+  .prose {
+    max-width: 720px;
+    margin-top: clamp(32px, 5vw, 56px);
+  }
+  .prose :global(h2) {
+    font-family: var(--serif);
+    font-weight: 800;
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    letter-spacing: -0.01em;
+    margin: 2em 0 0.5em;
+  }
+  .prose :global(h3) {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: 1.35rem;
+    margin: 1.6em 0 0.5em;
+  }
+  .prose :global(p) {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 1.2em;
+  }
+  .prose :global(strong) {
+    color: var(--ink);
+    font-weight: 700;
+  }
+  .prose :global(a) {
+    color: var(--accent-cta);
+    text-underline-offset: 3px;
+  }
+  .prose :global(ul),
+  .prose :global(ol) {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    padding-left: 1.2em;
+    margin: 0 0 1.2em;
+  }
+  .post-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 13px;
+    max-width: 720px;
+    margin-top: clamp(40px, 6vw, 64px);
+    padding-top: clamp(28px, 4vw, 40px);
+    border-top: 1px solid var(--line);
+  }
+</style>

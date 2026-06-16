@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { SITE } from '../../consts';
+
+const posts = (await getCollection('blog'))
+  .filter((p) => !p.data.draft)
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+---
+
+<BaseLayout
+  title={`Insights · ${SITE.shortName}`}
+  description="How we think about design, development, SEO, and the craft behind sites that perform."
+>
+  <section class="page-head wrap">
+    <span class="eyebrow"><span class="bar"></span>Insights</span>
+    <h1 class="h1">How we think about the work.</h1>
+    <p class="lead">
+      Notes on design, development, SEO, and the craft behind sites that earn their keep.
+    </p>
+  </section>
+
+  <section class="section wrap" style="padding-top:0">
+    <div class="blog-grid">
+      {
+        posts.map((b) => (
+          <a class="bcard" href={`/blog/${b.slug}`}>
+            <div class="bcard-img"></div>
+            <div class="bcard-body">
+              <div class="post-meta">
+                <span>{b.data.category}</span>
+                <span class="sep">/</span>
+                <span class="read">{b.data.readTime}</span>
+                <span class="sep">/</span>
+                <time datetime={b.data.publishDate.toISOString()}>{fmt(b.data.publishDate)}</time>
+              </div>
+              <h2>{b.data.title}</h2>
+              <p>{b.data.description}</p>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-top: clamp(128px, 16vw, 168px);
+    padding-bottom: clamp(36px, 5vw, 56px);
+  }
+  .page-head .h1 {
+    margin-top: 14px;
+    font-size: clamp(2.6rem, 5.5vw, 4.6rem);
+  }
+  .page-head .lead {
+    margin-top: 18px;
+    max-width: 52ch;
+  }
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+  .bcard {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    transition: transform 0.25s var(--ease), box-shadow 0.25s;
+  }
+  .bcard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  .bcard-img {
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, oklch(0.72 0.06 272 / 0.22), oklch(0.97 0.01 286));
+    position: relative;
+  }
+  .bcard-img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(100% 120% at 0% 0%, oklch(0.37 0.075 287 / 0.14), transparent 60%);
+  }
+  .bcard-body {
+    padding: 22px 24px 26px;
+  }
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--sans);
+    font-size: 12px;
+    color: var(--accent-cta);
+  }
+  .post-meta .sep {
+    color: var(--line-2);
+  }
+  .post-meta .read,
+  .post-meta time {
+    color: var(--faint);
+  }
+  .bcard h2 {
+    font-family: var(--serif);
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1.9vw, 1.6rem);
+    line-height: 1.16;
+    margin: 12px 0 8px;
+  }
+  .bcard p {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+  @media (max-width: 860px) {
+    .blog-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

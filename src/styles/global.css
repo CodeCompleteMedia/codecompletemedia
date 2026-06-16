@@ -1,0 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================ TOKENS ============================ */
+:root {
+  /* Brand identity (from logo): aubergine + periwinkle. Coral = energy accent. */
+  --ink:        oklch(0.24 0.055 288);   /* deep aubergine-black */
+  --brand:      oklch(0.37 0.075 287);   /* #3F3568 aubergine */
+  --brand-2:    oklch(0.72 0.060 272);   /* #95A6D1 periwinkle */
+  --accent:     oklch(0.71 0.170 25);    /* soft coral — glows + accents only */
+  --accent-cta: oklch(0.575 0.185 25);   /* accessible coral — buttons w/ white text */
+  --accent-cta-hover: oklch(0.515 0.185 25);
+
+  /* Tinted neutrals — every neutral leans toward the brand hue */
+  --bg:         oklch(0.980 0.006 286);
+  --paper:      oklch(0.992 0.004 286);   /* near-white, hue-tinted (never pure #fff) */
+  --surface:    oklch(0.995 0.004 286);
+  --surface-2:  oklch(0.963 0.008 286);
+  --surface-3:  oklch(0.940 0.012 286);
+  --line:       oklch(0.916 0.012 286);
+  --line-2:     oklch(0.880 0.016 286);
+
+  --text:       oklch(0.27 0.045 288);   /* primary body */
+  --muted:      oklch(0.505 0.028 288);  /* secondary body — AA on --bg */
+  --faint:      oklch(0.605 0.022 288);  /* labels / tertiary */
+
+  /* On dark surfaces */
+  --on-ink:        oklch(0.975 0.004 286);
+  --on-ink-muted:  oklch(0.815 0.020 284);
+  --on-ink-faint:  oklch(0.640 0.022 284);
+  --ink-line:      oklch(0.34 0.045 288);
+  --ink-panel:     oklch(0.29 0.050 288);
+
+  /* Type */
+  --serif: 'Rokkitt', ui-serif, Georgia, serif;
+  --sans:  'Urbanist', system-ui, -apple-system, sans-serif;
+
+  /* Radius */
+  --r-sm: 10px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-pill: 999px;
+
+  /* Elevation — tinted toward ink */
+  --shadow-sm:  0 4px 14px -8px oklch(0.24 0.06 288 / 0.30);
+  --shadow-md:  0 22px 50px -30px oklch(0.24 0.06 288 / 0.32);
+  --shadow-lg:  0 30px 70px -34px oklch(0.24 0.06 288 / 0.40);
+  --shadow-cta: 0 16px 34px -10px oklch(0.575 0.185 25 / 0.50);
+
+  /* Layout */
+  --maxw: 1180px;
+  --gutter: clamp(20px, 5vw, 40px);
+  --ease: cubic-bezier(.2,.7,.2,1);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:var(--sans); font-size:17px; line-height:1.6; font-weight:400;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{background:var(--brand-2); color:var(--ink)}
+img,svg{display:block; max-width:100%}
+a{color:inherit}
+button{font-family:inherit}
+
+/* Visible keyboard focus everywhere */
+:focus-visible{outline:2.5px solid var(--brand); outline-offset:3px; border-radius:6px}
+:focus:not(:focus-visible){outline:none}
+
+.skip{
+  position:absolute; left:16px; top:-60px; z-index:200;
+  background:var(--ink); color:var(--on-ink); padding:12px 18px; border-radius:var(--r-sm);
+  font-weight:700; font-size:15px; text-decoration:none; transition:top .2s var(--ease);
+}
+.skip:focus{top:16px}
+
+.wrap{max-width:var(--maxw); margin:0 auto; padding-inline:var(--gutter)}
+.serif{font-family:var(--serif)}
+.idx{font-family:var(--sans); font-size:13px; letter-spacing:.02em; color:var(--accent); font-weight:500}
+
+/* ============================ BUTTONS ============================ */
+.btn{
+  display:inline-flex; align-items:center; gap:9px; cursor:pointer; text-decoration:none;
+  font-weight:700; font-size:16px; line-height:1; white-space:nowrap; border:1px solid transparent;
+  padding:14px 22px; border-radius:var(--r-md); transition:transform .2s var(--ease), box-shadow .2s var(--ease), background .2s, border-color .2s, color .2s;
+}
+.btn:active{transform:translateY(0) scale(.985)}
+.btn-primary{background:var(--accent-cta); color:var(--paper); box-shadow:0 1px 0 oklch(0.40 0.18 25 / .4)}
+.btn-primary:hover{background:var(--accent-cta-hover); transform:translateY(-2px); box-shadow:var(--shadow-cta)}
+.btn-ghost{background:var(--surface); color:var(--ink); border-color:var(--line-2)}
+.btn-ghost:hover{transform:translateY(-2px); border-color:var(--brand)}
+.btn-ink{background:var(--ink); color:var(--on-ink)}
+.btn-ink:hover{transform:translateY(-2px); box-shadow:var(--shadow-md)}
+.btn-light{background:var(--paper); color:var(--ink)}
+.btn-light:hover{transform:translateY(-2px); box-shadow:0 14px 30px -14px oklch(0 0 0 / .5)}
+.btn-on-ink{background:oklch(1 0 0 / .08); color:var(--on-ink); border-color:oklch(1 0 0 / .2)}
+.btn-on-ink:hover{transform:translateY(-2px); background:oklch(1 0 0 / .14)}
+
+/* ============================ TYPE ============================ */
+.h1{font-family:var(--serif); font-weight:800; font-size:clamp(2.7rem,6vw,5rem); line-height:.98; letter-spacing:-.02em; margin:0}
+.h2{font-family:var(--serif); font-weight:800; font-size:clamp(2rem,4.2vw,3.4rem); line-height:1.03; letter-spacing:-.02em; margin:0}
+.lead{font-size:clamp(1.08rem,1.5vw,1.32rem); line-height:1.55; color:var(--muted); max-width:34ch; margin:0}
+.accent{color:var(--accent-cta)}
+.section{padding-block:clamp(64px,9vw,118px)}
+.section-head{display:flex; flex-direction:column; gap:14px; max-width:42ch}
+.eyebrow{display:flex; align-items:center; gap:10px; font-family:var(--sans); font-size:13px; color:var(--accent); font-weight:700; letter-spacing:.02em}
+.eyebrow .bar{width:26px; height:1.5px; background:var(--accent); display:inline-block}
+
+/* ============================ DARK SECTIONS ============================ */
+.dark{background:var(--ink); color:var(--on-ink)}
+.dark .h2{color:var(--on-ink)}
+.dark .lead{color:var(--on-ink-muted)}
+.dark .eyebrow,.dark .eyebrow .bar{color:var(--brand-2); background:initial}
+.dark .eyebrow .bar{background:var(--brand-2)}
+.chip{font-family:var(--sans); font-size:12px; color:var(--muted); background:var(--surface-2); border:1px solid var(--line); padding:5px 10px; border-radius:var(--r-pill)}
+.dark .chip{color:var(--on-ink-muted); background:oklch(1 0 0 / .05); border-color:var(--ink-line)}
+
+/* ============================ REVEAL ============================ */
+[data-reveal]{opacity:0; transform:translateY(22px); transition:opacity .8s var(--ease), transform .8s var(--ease)}
+[data-reveal].shown{opacity:1; transform:none}
+
+/* ============================ ANCHOR JUMP ============================ */
+.jump{scroll-margin-top:90px}
+
+/* ============================ REDUCED MOTION ============================ */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important; animation-iteration-count:1!important; transition-duration:.001ms!important; scroll-behavior:auto!important}
+  [data-reveal]{opacity:1; transform:none}
+}
