@@ -41,7 +41,10 @@ const ogImageUrl = ogImage
     {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     <meta name="twitter:card" content="summary_large_image" />
+    <!-- Colored logo on light browsers; the SVG self-flips to white in dark mode,
+         and favicon-dark.svg covers browsers that honor media-based icon switching. -->
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
