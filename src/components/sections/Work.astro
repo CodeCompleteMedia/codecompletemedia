@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
 const works = (await getCollection('case-studies')).sort(
   (a, b) => a.data.order - b.data.order
@@ -25,12 +26,13 @@ const works = (await getCollection('case-studies')).sort(
                 </div>
                 <span class="shot-name">{w.data.client}</span>
                 {w.data.image && (
-                  <img
+                  <Image
                     class="shot-img"
                     src={w.data.image}
                     alt={w.data.imageAlt ?? `${w.data.client} website`}
+                    widths={[400, 600, 1200]}
+                    sizes="(min-width: 861px) 600px, 100vw"
                     loading="lazy"
-                    onerror="this.remove()"
                   />
                 )}
               </div>
@@ -150,6 +152,8 @@ const works = (await getCollection('case-studies')).sort(
     left: 0;
     right: 0;
     bottom: 0;
+    width: auto; /* override width/height attrs from <Image>; insets govern */
+    height: auto;
     object-fit: cover;
     object-position: top center; /* top aligned */
     z-index: 1;

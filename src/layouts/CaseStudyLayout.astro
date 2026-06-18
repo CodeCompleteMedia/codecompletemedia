@@ -1,5 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { SITE } from '../consts';
 
 interface Props {
@@ -8,7 +10,7 @@ interface Props {
   summary?: string;
   result: string;
   url?: string;
-  image?: string;
+  image?: ImageMetadata;
   imageAlt?: string;
   tags?: string[];
   publishDate?: Date;
@@ -25,6 +27,7 @@ const year = publishDate ? publishDate.getFullYear() : undefined;
   description={summary ?? title}
   ogTitle={`${client} · ${SITE.shortName}`}
   ogDescription={summary ?? title}
+  ogImage={image?.src}
 >
   <article class="cs">
     <div class="wrap cs-head">
@@ -46,11 +49,14 @@ const year = publishDate ? publishDate.getFullYear() : undefined;
         <span class="shot-name">{client}</span>
         {
           image && (
-            <img
+            <Image
               class="shot-img"
               src={image}
               alt={imageAlt ?? `${client} website`}
-              onerror="this.remove()"
+              widths={[640, 1024, 1440]}
+              sizes="(min-width: 1180px) 1180px, 100vw"
+              loading="eager"
+              fetchpriority="high"
             />
           )
         }
@@ -178,6 +184,8 @@ const year = publishDate ? publishDate.getFullYear() : undefined;
     left: 0;
     right: 0;
     bottom: 0;
+    width: auto; /* override width/height attrs from <Image>; insets govern */
+    height: auto;
     object-fit: cover;
     object-position: top center; /* top aligned */
     z-index: 1;

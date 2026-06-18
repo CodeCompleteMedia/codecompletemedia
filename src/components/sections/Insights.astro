@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { Image } from 'astro:assets';
 
 const posts = (await getCollection('blog'))
   .filter((p) => !p.data.draft)
@@ -18,11 +19,12 @@ const posts = (await getCollection('blog'))
         <a class={`post${i === 0 ? ' feature' : ''}`} href={`/blog/${b.slug}`} data-reveal>
           <div class="post-img">
             {b.data.image && (
-              <img
+              <Image
                 src={b.data.image}
                 alt={b.data.imageAlt ?? b.data.title}
+                widths={[400, 800, 1200]}
+                sizes="(min-width: 861px) 50vw, 100vw"
                 loading="lazy"
-                onerror="this.remove()"
               />
             )}
           </div>
