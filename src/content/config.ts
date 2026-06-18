@@ -40,6 +40,8 @@ const blog = defineCollection({
     category: z.string(),
     readTime: z.string(),
     publishDate: z.coerce.date(),
+    image: z.string().optional(), // path under /public, e.g. /images/blog/slug.png
+    imageAlt: z.string().optional(),
     draft: z.boolean().default(false),
     featured: z.boolean().default(false),
   }),

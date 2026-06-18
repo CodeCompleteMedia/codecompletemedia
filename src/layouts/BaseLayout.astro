@@ -9,6 +9,7 @@ interface Props {
   description?: string;
   ogTitle?: string;
   ogDescription?: string;
+  ogImage?: string;
 }
 
 const {
@@ -16,9 +17,13 @@ const {
   description = SITE.description,
   ogTitle = SITE.title,
   ogDescription = SITE.ogDescription,
+  ogImage,
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).toString();
+const ogImageUrl = ogImage
+  ? new URL(ogImage, Astro.site ?? SITE.url).toString()
+  : undefined;
 ---
 
 <!doctype html>
@@ -33,6 +38,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? SITE.url).toString()
     <meta property="og:description" content={ogDescription} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonical} />
+    {ogImageUrl && <meta property="og:image" content={ogImageUrl} />}
+    {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon.ico" sizes="any" />

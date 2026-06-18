@@ -28,7 +28,16 @@ const fmt = (d: Date) =>
       {
         posts.map((b) => (
           <a class="bcard" href={`/blog/${b.slug}`}>
-            <div class="bcard-img"></div>
+            <div class="bcard-img">
+              {b.data.image && (
+                <img
+                  src={b.data.image}
+                  alt={b.data.imageAlt ?? b.data.title}
+                  loading="lazy"
+                  onerror="this.remove()"
+                />
+              )}
+            </div>
             <div class="bcard-body">
               <div class="post-meta">
                 <span>{b.data.category}</span>
@@ -90,6 +99,15 @@ const fmt = (d: Date) =>
     position: absolute;
     inset: 0;
     background: radial-gradient(100% 120% at 0% 0%, oklch(0.37 0.075 287 / 0.14), transparent 60%);
+    pointer-events: none;
+  }
+  .bcard-img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .bcard-body {
     padding: 22px 24px 26px;

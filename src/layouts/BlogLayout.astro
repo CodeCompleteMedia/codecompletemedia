@@ -8,9 +8,11 @@ interface Props {
   category: string;
   readTime: string;
   publishDate: Date;
+  image?: string;
+  imageAlt?: string;
 }
 
-const { title, description, category, readTime, publishDate } = Astro.props;
+const { title, description, category, readTime, publishDate, image, imageAlt } = Astro.props;
 const dateLabel = publishDate.toLocaleDateString('en-US', {
   year: 'numeric',
   month: 'long',
@@ -18,7 +20,7 @@ const dateLabel = publishDate.toLocaleDateString('en-US', {
 });
 ---
 
-<BaseLayout title={`${title} · ${SITE.shortName}`} description={description} ogTitle={title} ogDescription={description}>
+<BaseLayout title={`${title} · ${SITE.shortName}`} description={description} ogTitle={title} ogDescription={description} ogImage={image}>
   <article class="post-page">
     <div class="wrap post-head">
       <a class="back" href="/blog">← All insights</a>
@@ -32,6 +34,11 @@ const dateLabel = publishDate.toLocaleDateString('en-US', {
       <h1 class="h1">{title}</h1>
       <p class="lead">{description}</p>
     </div>
+    {image && (
+      <div class="wrap post-hero">
+        <img src={image} alt={imageAlt ?? title} />
+      </div>
+    )}
     <div class="wrap prose">
       <slot />
     </div>
@@ -83,6 +90,17 @@ const dateLabel = publishDate.toLocaleDateString('en-US', {
   .post-head .lead {
     margin-top: 18px;
     max-width: 60ch;
+  }
+  .post-hero {
+    margin-top: clamp(28px, 4vw, 44px);
+  }
+  .post-hero img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
   }
   .prose {
     max-width: 720px;
