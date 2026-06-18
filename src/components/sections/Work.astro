@@ -150,10 +150,8 @@ const works = (await getCollection('case-studies')).sort(
     position: absolute;
     top: 38px; /* sits below the browser chrome bar */
     left: 0;
-    right: 0;
-    bottom: 0;
-    width: auto; /* override width/height attrs from <Image>; insets govern */
-    height: auto;
+    width: 100%; /* override intrinsic width/height attrs from <Image> */
+    height: calc(100% - 38px);
     object-fit: cover;
     object-position: top center; /* top aligned */
     z-index: 1;

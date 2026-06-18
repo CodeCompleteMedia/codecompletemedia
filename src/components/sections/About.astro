@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import portrait from '../../assets/matthew-higley.jpeg';
+
 const values = [
   {
     t: 'Sweat the details',
@@ -35,7 +38,14 @@ const values = [
     }
   </div>
   <div class="founder" data-reveal style="margin-top:clamp(34px,5vw,52px)">
-    <div class="portrait">portrait</div>
+    <Image
+      class="portrait"
+      src={portrait}
+      alt="Matthew Higley, founder of Code Complete Media"
+      widths={[240, 480, 800]}
+      sizes="(max-width: 860px) 240px, 400px"
+      loading="lazy"
+    />
     <div>
       <h3>Matthew Higley</h3>
       <div class="role">Founder &amp; Lead</div>
@@ -92,15 +102,13 @@ const values = [
     margin-top: clamp(30px, 4vw, 46px);
   }
   .portrait {
+    width: 100%;
+    height: auto; /* let aspect-ratio govern; override <Image> height attr */
     aspect-ratio: 1;
+    object-fit: cover;
+    object-position: center top;
     border-radius: var(--r-lg);
     background: linear-gradient(140deg, oklch(0.72 0.06 272 / 0.3), var(--surface-3));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--faint);
   }
   .founder h3 {
     font-family: var(--serif);
