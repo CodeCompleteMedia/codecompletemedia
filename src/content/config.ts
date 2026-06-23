@@ -10,10 +10,25 @@ const caseStudies = defineCollection({
       summary: z.string().optional(),
       result: z.string(), // short label shown as the "url"/result chip
       url: z.string().default('#'),
+      // 'web' = browser-framed screenshot card. 'logo' = brand-plate card + brand-sheet page.
+      kind: z.enum(['web', 'logo']).default('web'),
       image: image().optional(), // relative path, e.g. ../../assets/work/entre.png
       imageAlt: z.string().optional(),
       tags: z.array(z.string()).default([]),
+      // Logo work: the four logo treatments shown on the brand plate + brand sheet.
+      // `mark` (monogram) is the typographic fallback when no logo art is supplied.
+      mark: z.string().optional(),
+      logo: z
+        .object({
+          primary: image(),
+          reversed: image().optional(),
+          monochrome: image().optional(),
+          appIcon: image().optional(),
+        })
+        .optional(),
+      palette: z.array(z.object({ name: z.string(), value: z.string() })).default([]),
       featured: z.boolean().default(false),
+      draft: z.boolean().default(false), // hidden in production builds, visible in dev
       order: z.number().default(0),
       publishDate: z.coerce.date().optional(),
     }),

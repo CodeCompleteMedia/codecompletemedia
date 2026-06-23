@@ -1,10 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
 import { Image } from 'astro:assets';
+import LogoPlate from '../work/LogoPlate.astro';
 
-const works = (await getCollection('case-studies')).sort(
-  (a, b) => a.data.order - b.data.order
-);
+const works = (
+  await getCollection('case-studies', ({ data }) => import.meta.env.DEV || !data.draft)
+).sort((a, b) => a.data.order - b.data.order);
 ---
 
 <section class="section dark jump" id="work">
@@ -18,22 +19,39 @@ const works = (await getCollection('case-studies')).sort(
     <div class="work-grid">
       {
         works.map((w) => {
+          const isLogo = w.data.kind === 'logo';
           return (
-            <a class={`work-card${w.data.featured ? ' feat' : ''}`} href={`/work/${w.slug}`}>
+            <a
+              class={`work-card${w.data.featured ? ' feat' : ''}${isLogo ? ' logo' : ''}`}
+              href={`/work/${w.slug}`}
+            >
               <div class="shot">
-                <div class="shot-chrome">
-                  <i /><i /><i /><span class="url">{w.data.result}</span>
-                </div>
-                <span class="shot-name">{w.data.client}</span>
-                {w.data.image && (
-                  <Image
-                    class="shot-img"
-                    src={w.data.image}
-                    alt={w.data.imageAlt ?? `${w.data.client} website`}
-                    widths={[400, 600, 1200]}
-                    sizes="(min-width: 861px) 600px, 100vw"
-                    loading="lazy"
+                {isLogo ? (
+                  <LogoPlate
+                    client={w.data.client}
+                    mark={w.data.mark}
+                    primary={w.data.logo?.primary}
+                    reversed={w.data.logo?.reversed}
+                    palette={w.data.palette}
+                    variant="card"
                   />
+                ) : (
+                  <>
+                    <div class="shot-chrome">
+                      <i /><i /><i /><span class="url">{w.data.result}</span>
+                    </div>
+                    <span class="shot-name">{w.data.client}</span>
+                    {w.data.image && (
+                      <Image
+                        class="shot-img"
+                        src={w.data.image}
+                        alt={w.data.imageAlt ?? `${w.data.client} website`}
+                        widths={[400, 600, 1200]}
+                        sizes="(min-width: 861px) 600px, 100vw"
+                        loading="lazy"
+                      />
+                    )}
+                  </>
                 )}
               </div>
               <div class="work-body">
@@ -106,6 +124,13 @@ const works = (await getCollection('case-studies')).sort(
     position: absolute;
     inset: 0;
     background: radial-gradient(120% 80% at 80% -10%, oklch(0.72 0.06 272 / 0.28), transparent 55%);
+  }
+  /* Logo cards carry their own brand plate — no browser tint or dark base. */
+  .work-card.logo .shot {
+    background: none;
+  }
+  .work-card.logo .shot::after {
+    display: none;
   }
   .shot-chrome {
     position: absolute;

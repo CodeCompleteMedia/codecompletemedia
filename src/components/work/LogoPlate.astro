@@ -1,0 +1,218 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Brand-plate presentation for logo / identity work. Deliberately NOT a browser
+// window: the mark centered on a neutral brand canvas, a palette rail, and an
+// "Identity" tag. Hovering swaps to the reversed lockup, nodding to the real
+// logo deliverable of working on both light and dark.
+interface PaletteColor {
+  name: string;
+  value: string;
+}
+interface Props {
+  client: string;
+  mark?: string;
+  primary?: ImageMetadata;
+  reversed?: ImageMetadata;
+  palette?: PaletteColor[];
+  variant?: 'card' | 'hero';
+  tag?: string;
+}
+const {
+  client,
+  mark,
+  primary,
+  reversed,
+  palette = [],
+  variant = 'card',
+  tag = 'Identity',
+} = Astro.props;
+const monogram = (mark ?? client.trim().charAt(0)).toUpperCase();
+const dots = palette.slice(0, 5);
+const widths = variant === 'hero' ? [320, 508] : [220, 440];
+---
+
+<div class={`plate plate-${variant}`}>
+  <!-- Primary lockup on a light brand canvas -->
+  <div class="face face-primary">
+    <span class="tag">{tag}</span>
+    <div class="lockup">
+      {
+        primary ? (
+          <Image
+            class="mark-img"
+            src={primary}
+            alt={`${client} logo`}
+            widths={widths}
+            sizes={variant === 'hero' ? '254px' : '160px'}
+          />
+        ) : (
+          <span class="monogram">{monogram}</span>
+        )
+      }
+    </div>
+    {dots.length > 0 && (
+      <div class="rail" aria-hidden="true">
+        {dots.map((c) => <span class="dot" style={`--c:${c.value}`} />)}
+      </div>
+    )}
+  </div>
+  <!-- Reversed lockup, revealed on hover -->
+  <div class="face face-reversed" aria-hidden="true">
+    <div class="lockup">
+      {
+        reversed ? (
+          <Image class="mark-img" src={reversed} alt="" widths={widths} sizes={variant === 'hero' ? '254px' : '160px'} />
+        ) : (
+          <span class="monogram">{monogram}</span>
+        )
+      }
+    </div>
+  </div>
+</div>
+
+<style>
+  .plate {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+  }
+  .face {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.45s var(--ease);
+  }
+  /* Light brand canvas with a faint construction grid */
+  .face-primary {
+    background: linear-gradient(150deg, oklch(0.975 0.006 286), oklch(0.93 0.011 286));
+  }
+  .face-primary::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(oklch(0.24 0.055 288 / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, oklch(0.24 0.055 288 / 0.05) 1px, transparent 1px);
+    background-size: 38px 38px;
+    -webkit-mask-image: radial-gradient(120% 90% at 50% 45%, #000 35%, transparent 78%);
+    mask-image: radial-gradient(120% 90% at 50% 45%, #000 35%, transparent 78%);
+  }
+  /* Reversed: deep neutral stage so a dark lockup tile reads */
+  .face-reversed {
+    background: radial-gradient(130% 100% at 50% 0%, oklch(0.22 0.012 286), oklch(0.16 0.01 286));
+    opacity: 0;
+  }
+  .plate:hover .face-primary {
+    opacity: 0;
+  }
+  .plate:hover .face-reversed {
+    opacity: 1;
+  }
+
+  .lockup {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .mark-img {
+    width: auto;
+    object-fit: contain;
+  }
+  .plate-card .mark-img {
+    height: 56%;
+    max-height: 132px;
+  }
+  .plate-hero .mark-img {
+    height: 62%;
+    max-height: 264px;
+  }
+  /* the lockup wrapper needs a height for the % image to resolve against */
+  .plate-card .lockup {
+    height: 100%;
+  }
+  .plate-hero .lockup {
+    height: 100%;
+  }
+
+  .monogram {
+    font-family: var(--serif);
+    font-weight: 800;
+    line-height: 0.8;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .face-reversed .monogram {
+    color: var(--on-ink);
+  }
+  .plate-card .monogram {
+    font-size: clamp(56px, 9vw, 92px);
+  }
+  .plate-hero .monogram {
+    font-size: clamp(96px, 16vw, 188px);
+  }
+
+  .tag {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    z-index: 2;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--brand);
+    background: oklch(1 0 0 / 0.55);
+    border: 1px solid oklch(0.37 0.075 287 / 0.22);
+    padding: 5px 11px;
+    border-radius: var(--r-pill);
+  }
+  .plate-hero .tag {
+    top: 20px;
+    left: 20px;
+    font-size: 12px;
+    padding: 7px 14px;
+  }
+
+  .rail {
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    gap: 9px;
+    z-index: 1;
+  }
+  .dot {
+    width: 13px;
+    height: 13px;
+    border-radius: var(--r-pill);
+    background: var(--c);
+    box-shadow: 0 0 0 1px oklch(0.24 0.055 288 / 0.12) inset;
+  }
+  .plate-hero .rail {
+    bottom: 26px;
+    gap: 12px;
+  }
+  .plate-hero .dot {
+    width: 18px;
+    height: 18px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .face {
+      transition: none;
+    }
+  }
+</style>

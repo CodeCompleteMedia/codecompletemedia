@@ -1,9 +1,13 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content';
 import CaseStudyLayout from '../../layouts/CaseStudyLayout.astro';
+import LogoCaseStudyLayout from '../../layouts/LogoCaseStudyLayout.astro';
 
 export async function getStaticPaths() {
-  const items = await getCollection('case-studies');
+  const items = await getCollection(
+    'case-studies',
+    ({ data }) => import.meta.env.DEV || !data.draft
+  );
   return items.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
@@ -13,18 +17,38 @@ export async function getStaticPaths() {
 type Props = { entry: CollectionEntry<'case-studies'> };
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const d = entry.data;
 ---
 
-<CaseStudyLayout
-  client={entry.data.client}
-  title={entry.data.title}
-  summary={entry.data.summary}
-  result={entry.data.result}
-  url={entry.data.url}
-  image={entry.data.image}
-  imageAlt={entry.data.imageAlt}
-  tags={entry.data.tags}
-  publishDate={entry.data.publishDate}
->
-  <Content />
-</CaseStudyLayout>
+{
+  d.kind === 'logo' ? (
+    <LogoCaseStudyLayout
+      client={d.client}
+      title={d.title}
+      summary={d.summary}
+      result={d.result}
+      url={d.url}
+      mark={d.mark}
+      logo={d.logo}
+      palette={d.palette}
+      tags={d.tags}
+      publishDate={d.publishDate}
+    >
+      <Content />
+    </LogoCaseStudyLayout>
+  ) : (
+    <CaseStudyLayout
+      client={d.client}
+      title={d.title}
+      summary={d.summary}
+      result={d.result}
+      url={d.url}
+      image={d.image}
+      imageAlt={d.imageAlt}
+      tags={d.tags}
+      publishDate={d.publishDate}
+    >
+      <Content />
+    </CaseStudyLayout>
+  )
+}
