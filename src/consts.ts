@@ -2,14 +2,14 @@
 // Centralized so they aren't duplicated across pages/components.
 
 export const SITE = {
-  name: 'Code Complete Media',
+  name: 'CodeCompleteMedia',
   shortName: 'CodeCompleteMedia',
   url: 'https://codecompletemedia.com',
-  title: 'Code Complete Media · Full-service web studio',
+  title: 'CodeCompleteMedia · Websites designed and built by one person',
   description:
-    'Code Complete Media designs and builds websites that earn their keep, plus the SEO, copy, and strategy to back them up. One team. No layers. No mystery invoices.',
+    'I design and build websites, then handle the SEO, copy, and strategy that keep them working. You work with me directly, from the first call to launch.',
   ogDescription:
-    'Agency quality. Freelancer price. Zero runaround. Sites that do the selling for you.',
+    'One person who designs, builds, and writes your site. You always know who you are talking to, and the invoice never surprises you.',
   email: 'hello@codecompletemedia.com',
   responseTime: 'Within 1 business day',
 } as const;

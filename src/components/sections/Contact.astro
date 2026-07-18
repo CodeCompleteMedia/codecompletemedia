@@ -4,19 +4,19 @@ import { SITE } from '../../consts';
 const faqs = [
   {
     q: 'What does a project cost?',
-    a: 'It depends on scope, but we quote flat and clear up front. No surprises on the invoice.',
+    a: 'It depends on the scope, but I quote flat and up front so the invoice never surprises you.',
   },
   {
     q: 'How long does a site take?',
-    a: 'Most marketing sites run four to eight weeks from kickoff. You get the timeline before we start.',
+    a: 'Most marketing sites take four to eight weeks from kickoff. You will have the timeline before I start.',
   },
   {
     q: 'Do I own everything at the end?',
-    a: 'Yes. Code, content, and accounts are yours to keep. We hand over clean.',
+    a: 'Yes. The code, content, and accounts are all yours. I hand everything over clean when we are done.',
   },
   {
     q: 'Do you really use AI?',
-    a: 'Yes, as a tool. AI and, not AI instead. A human makes every call that matters.',
+    a: 'Yes, and I am upfront about it. It helps me move faster, but I make every real decision myself.',
   },
 ];
 ---
@@ -27,8 +27,7 @@ const faqs = [
       <span class="eyebrow"><span class="bar"></span>Contact</span>
       <h2 class="h2" style="margin-top:12px">Let's build something.</h2>
       <p class="lead" style="margin-top:18px; max-width:42ch">
-        Tell us what you are working on. You will hear back from a real person, usually within one
-        business day.
+        Tell me what you are working on. You will hear back from me, usually within one business day.
       </p>
       <div class="contact-info">
         <div>
@@ -97,14 +96,14 @@ const faqs = [
           </select>
         </div>
         <div class="field">
-          <label for="f-msg">Tell us about it <span class="req">*</span></label>
+          <label for="f-msg">Tell me about it <span class="req">*</span></label>
           <textarea id="f-msg" name="message" placeholder="What are you building, and what does success look like?" required aria-describedby="e-msg"></textarea>
           <span class="err" id="e-msg">Tell us a little about the project.</span>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center">Send it over</button>
-        <p class="form-note">No spam, no sales sequence. Just a real reply.</p>
+        <p class="form-note">No spam and no sales sequence, just a real reply from me.</p>
         <p class="form-error" id="formError" role="alert" hidden>
-          Something went wrong sending your message. Please email us directly at
+          Something went wrong sending your message. Please email me directly at
           <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.
         </p>
       </form>
@@ -115,7 +114,7 @@ const faqs = [
           </svg>
         </div>
         <h3>Got it. Thank you.</h3>
-        <p>We will get back to you within one business day. Talk soon.</p>
+        <p>I will get back to you within one business day. Talk soon.</p>
       </div>
     </div>
   </div>

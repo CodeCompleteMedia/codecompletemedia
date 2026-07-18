@@ -1,6 +1,6 @@
-# Code Complete Media
+# CodeCompleteMedia
 
-Marketing/portfolio site for Code Complete Media — a full-service web studio.
+Marketing/portfolio site for CodeCompleteMedia — a full-service web studio.
 Built per [`PROJECT_PLAN.md`](./PROJECT_PLAN.md).
 
 ## Stack
